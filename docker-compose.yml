@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  datastore:
+    image: mongo:6.0.6
+    ports:
+      - "27017:27017"
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      - datastore
